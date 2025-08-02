@@ -76,7 +76,10 @@ async def register_user(message, referrer_id=None):
     if user_id not in users_data:
         users_data[user_id] = {"stars": 0, "referrals": 0, "last_bonus": None}
 
-        if referrer_id and referrer_id != user_id and referrer_id in users_data:
+        if referrer_id and referrer_id != user_id:
+            if referrer_id not in users_data:
+                users_data[referrer_id] = {"stars": 0, "referrals": 0, "last_bonus": None}
+
             users_data[referrer_id]["stars"] += 3
             users_data[referrer_id]["referrals"] += 1
 
